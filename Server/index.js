@@ -1,13 +1,19 @@
 import express from "express";
 import dotenv from "dotenv";
 import server from "./server.js";
+import dbConnection from "./config/dbConnection.js";
 
 
 // DotEnv Configuration 
 dotenv.config({
-    path: "./data/.env"
+    path: "./config/config.env"
 })
 
+// Database Connection 
+dbConnection();
+
+
+// Express App
 const app = express();
 
 // definging server PORT
