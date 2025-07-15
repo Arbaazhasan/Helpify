@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import server from "./server.js";
 import dbConnection from "./config/dbConnection.js";
+import errorMiddleware from "./middleware/error.js";
 
 
 // DotEnv Configuration 
@@ -31,4 +32,6 @@ app.use("/", (req, res) => {
 });
 
 // server connection
-server(app, PORT)
+server(app, PORT);
+
+app.use(errorMiddleware);

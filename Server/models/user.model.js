@@ -15,7 +15,7 @@ const userSchema = mongoose.Schema({
         lowercase: true,
         trim: true,
     },
-    PasswordHash: {
+    passwordHash: {
         type: String,
         required: true,
         select: false
@@ -66,4 +66,4 @@ const userSchema = mongoose.Schema({
     timestamps: true
 });
 
-const userModel = mongoose.model("User", userSchema);
+export const userModel = mongoose.model("User", userSchema);
