@@ -5,6 +5,8 @@ import { catchAsyncError } from "../middleware/catchAsyncError.js";
 import ErrorHandler from "../utils/errorHandler.js";
 
 
+// user registaion API : user can register its self with these parameters(username, email, password, name) 
+// and it will store the password in the hashed form and genarate the token at the client side in cookie
 export const userRegistration = catchAsyncError(async (req, res, next) => {
 
     const { username, email, password, name } = req.body;
@@ -46,6 +48,43 @@ export const userRegistration = catchAsyncError(async (req, res, next) => {
 });
 
 
+export const userLogin = catchAsyncError(async (req, res, next) => {
+
+    const { username, email, password } = req.body;
+
+
+    if (!(username || email) || !password)
+        return next(new ErrorHandler("All fields are required!", 400));
+
+    const checkExits = await userModel.findOne({ $or: [{ username }, { email }] }).select("+passwordHash");
+    console.log(checkExits)
+    if (!checkExits) return next(new ErrorHandler("User does not exits!", 400));
+
+    const isPasswordCorrect = await bcrypt.compare(password, checkExits.passwordHash)
+
+    if (!isPasswordCorrect) return next(ErrorHandler("Password does not match!", 401));
+
+    const userToken = jwt.sign({ _id: checkExits._id }, process.env.JWT_URI);
+
+    await userModel.findByIdAndUpdate(checkExits._id, {
+        isActive: true
+    }, { new: true });
+
+    res.status(200).cookie("token", userToken, {
+        maxAge: 1000 * 60 * 60,
+        httpOnly: true,
+        secure: true
+    }).json({
+        success: true,
+        message: "Login Successfull."
+    });
+
+
+
+})
+
+
+// User Logout API : it will remove the token from the client side and user will be logout
 export const userLogout = catchAsyncError(async (req, res, next) => {
     const { token } = req.cookies;
 
