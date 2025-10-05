@@ -1,69 +1,33 @@
-import mongoose from "mongoose";
+import mongoose from "mongoose"
 
-const userSchema = mongoose.Schema({
 
-    username: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-    },
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase: true,
-        trim: true,
-    },
-    passwordHash: {
-        type: String,
-        required: true,
-        select: false
-    },
+const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
         trim: true
     },
-    phoneNumber: {
+    email: {
         type: String,
-        trim: true
+        required: true,
+        trim: true,
+        unique: true,
+        lowercase: true
     },
-    emergencyContactNumber: {
+
+    password: {
         type: String,
-        required: false,
-        trim: true
+        select: false,
+        required: true,
     },
-    address: {
-        street: { type: String, required: false, trim: true },
-        city: { type: String, required: false, trim: true },
-        state: { type: String, required: false, trim: true },
-        zipCode: { type: String, required: false, trim: true },
-        country: { type: String, required: false, trim: true },
-    },
-    emailVerified: {
-        type: Boolean,
-        default: false
-    },
-    pushNotificationTokens: {
-        type: [String],
-        default: []
-    },
-    role: {
-        type: String,
-        enum: ["user", "premium_user"],
-        default: "user"
-    },
-    isActive: {
-        type: Boolean,
-        default: true
-    },
+    qrCodeIdArray: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "QRCode"
+    }],
     profilePictureURL: {
         type: String,
-        required: false
     },
-}, {
-    timestamps: true
+
 });
 
 export const userModel = mongoose.model("User", userSchema);

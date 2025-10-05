@@ -1,0 +1,118 @@
+.header {
+    // border: 2px solid red;
+    height: 90px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0rem 4rem;
+    box-shadow: 0px 0px 20px 2px rgba(194, 194, 194, 0.442);
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+
+
+    >.header-logo {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        cursor: pointer;
+
+        >div {
+            border-radius: .5rem;
+            background: linear-gradient(to bottom right, #a855f7, #ec4899, #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: .5rem;
+            color: white;
+            font-size: 2rem;
+
+        }
+
+        >p {
+            font-size: 3rem;
+            font-weight: bolder;
+            background: linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44);
+            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+
+        }
+    }
+
+
+    >.header-options {
+        display: flex;
+        // border: 3px solid red;
+        gap: 3rem;
+
+        align-items: center;
+        justify-content: center;
+        font-size: large;
+
+        >.profile-icon {
+            border: 3px solid black;
+            width: 4rem;
+            height: 4rem;
+            border-radius: 100%;
+            padding: 3px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+
+            &:hover {
+                margin-bottom: 0px;
+            }
+
+            >div {
+                // border: 2px solid blue;
+                width: 100%;
+                height: 100%;
+                border-radius: 100%;
+                overflow: hidden;
+                display: flex;
+                align-content: center;
+                justify-content: center;
+
+
+
+                >img {
+                    // border: 2px solid blue;
+                    max-width: 100%;
+                    max-height: 100%;
+                    object-fit: contain;
+                }
+            }
+
+        }
+
+        >div {
+            display: flex;
+            gap: .5rem;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: .3s all;
+
+            &:hover {
+                transform: translateY(-5px);
+                transition: .3s all;
+            }
+
+            >p {
+                display: flex;
+                align-items: center;
+
+            }
+
+
+        }
+    }
+
+
+}

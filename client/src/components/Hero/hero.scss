@@ -1,0 +1,53 @@
+.hero {
+    // border: 2px solid red;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: gray;
+    padding-bottom: 100px;
+    gap: 5rem;
+
+
+    >h1 {
+        // border: 2px solid red;
+
+        font-size: 12vw;
+        font-weight: 700;
+        font-weight: bolder;
+        background: linear-gradient(to right, #f32170, #ff6b08, #cf23cf, #eedd44);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+    }
+
+    >div {
+        // border: 2px solid red;
+        display: flex;
+        gap: 5rem;
+
+        >p {
+            padding: 1.2rem 2rem;
+            // border: 2px solid red;
+            border-radius: 2rem;
+            color: white;
+            font-size: large;
+
+
+            &:nth-child(1) {
+                background-color: rgb(139, 92, 246);
+            }
+
+            &:nth-child(2) {
+                background-color: rgb(16, 185, 129);
+            }
+
+            &:nth-child(3) {
+                background-color: rgb(245, 158, 11);
+            }
+
+
+        }
+    }
+
+}
