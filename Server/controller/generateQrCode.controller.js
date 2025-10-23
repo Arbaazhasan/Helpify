@@ -65,6 +65,16 @@ export const deleteQRCode = catchAsyncError(async (req, res, next) => {
 });
 
 
+export const getAllQrCodes = catchAsyncError(async (req, res, next) => {
+
+    const data = await QrCodeModel.find({ userId: req.user._id });
+
+    res.status(200).json({
+        success: true,
+        message: data
+    });
+});
+
 export const getOwnerDetail = catchAsyncError(async (req, res, next) => {
 
     const { id } = req.params;
