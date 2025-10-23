@@ -17,12 +17,12 @@ const QRCodeSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    primaryNumber: {
+    primaryContactNumber: {
         type: String,
         required: true,
         trim: true
     },
-    secondaryNumber: {
+    secondaryContactNumber: {
         type: String,
         trim: true
     },
@@ -37,4 +37,4 @@ const QRCodeSchema = new mongoose.Schema({
     },
 });
 
-const QRCodeModel = mongoose.model("QRCode", QRCodeSchema);
+export const QrCodeModel = mongoose.model("QRCode", QRCodeSchema);

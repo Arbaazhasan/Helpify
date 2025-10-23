@@ -2,10 +2,12 @@ import { config } from "dotenv";
 import express, { json } from "express"
 import db_connect from "./data/db_connect.js";
 import cors from 'cors'
+import cookieParser from "cookie-parser";
+
 import errorMiddleware from "./middleware/Error.js";
 
 import userRouter from "./routes/user.routes.js"
-import cookieParser from "cookie-parser";
+import generateQrCodeRouter from './routes/generateQrCode.routes.js';
 
 const app = express();
 
@@ -38,6 +40,7 @@ app.set("trust proxy", 1);
 
 // Routers
 app.use('/api/v1/user', userRouter);
+app.use('/api/v1/qr', generateQrCodeRouter);
 
 
 // Home Route

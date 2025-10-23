@@ -27,7 +27,11 @@ const userSchema = new mongoose.Schema({
     profilePictureURL: {
         type: String,
     },
+    verificationKey: {
+        type: String,
+        required: true,
+    }
 
-});
+}, { timestamps: true });
 
 export const userModel = mongoose.model("User", userSchema);

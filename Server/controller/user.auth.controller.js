@@ -25,11 +25,15 @@ export const register = catchAsyncError(async (req, res, next) => {
     // encrupt the passowrd
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Generate Verification key
+    const verificationKey = Math.floor(Math.random() * 9000) + 1000 * new Date().getMilliseconds();
+
     // create user
     const user = await userModel.create({
         name,
         email,
         password: hashedPassword,
+        verificationKey
     });
 
     if (!user) return next(new ErrorHandler(`Error From register controller : ${user}`));
@@ -99,12 +103,3 @@ export const logout = catchAsyncError((req, res, next) => {
 
 });
 
-
-export const getUserProfile = catchAsyncError(async (req, res, next) => {
-
-    res.status(200).json({
-        success: true,
-        message: req.user,
-    })
-
-})
