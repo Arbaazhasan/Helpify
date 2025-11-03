@@ -5,6 +5,7 @@ import { AiOutlineSecurityScan } from "react-icons/ai";
 const VerifyProduct = () => {
     return (
         <div className='Verify-Product-Page'>
+            
 
             <form className="card">
                 <div className="verify-heading">

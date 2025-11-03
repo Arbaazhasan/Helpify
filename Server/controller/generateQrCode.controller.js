@@ -32,7 +32,7 @@ export const generateQrCode = catchAsyncError(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        message: qrCode._id
+        message: qrCode
     })
 
 });
@@ -115,8 +115,8 @@ export const verifyOwnerWithKey = catchAsyncError(async (req, res, next) => {
 
     res.status(200).json({
         success: true,
-        message: "Owner verified successfully",
-        data: {
+        message: {
+            message: "Owner verified successfully",
             name: user.name,
             email: user.email,
         }

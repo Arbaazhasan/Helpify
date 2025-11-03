@@ -20,13 +20,13 @@ const userSchema = new mongoose.Schema({
         select: false,
         required: true,
     },
+    picture: {
+        type: String
+    },
     qrCodeIdArray: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "QRCode"
     }],
-    profilePictureURL: {
-        type: String,
-    },
     verificationKey: {
         type: String,
         required: true,

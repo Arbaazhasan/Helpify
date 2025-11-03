@@ -53,6 +53,19 @@
         align-items: center;
         justify-content: center;
         font-size: large;
+        text-decoration: none;
+
+        #header-login-btn {
+            padding: 7px 10px;
+            border-radius: 10px;
+            background: linear-gradient(to bottom right, #a855f7, #ec4899, #3b82f6);
+            color: white;
+
+            &:hover {
+                font-weight: bolder;
+            }
+
+        }
 
         >.profile-icon {
             border: 3px solid black;
@@ -91,13 +104,17 @@
 
         }
 
-        >div {
+        >a {
+            // border: 2px solid red;
             display: flex;
             gap: .5rem;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: .3s all;
+            text-decoration: none;
+            color: black;
+
 
             &:hover {
                 transform: translateY(-5px);

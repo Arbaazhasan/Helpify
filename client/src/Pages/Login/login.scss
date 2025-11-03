@@ -60,10 +60,30 @@
             }
         }
 
+        >.login-page-userInputs {
+            // border: 2px solid red;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+
+            >input {
+                padding: 1rem;
+                width: 100%;
+                font-size: large;
+            }
+
+            >p {
+                color: red;
+            }
+        }
+
         >.login-btn {
 
             // border: 2px solid red;
             width: 100%;
+
+            text-align: center;
 
             >button {
                 font-size: large;
@@ -84,6 +104,20 @@
                     transition: .3s all;
                 }
 
+            }
+
+            >p {
+                color: gray;
+                margin-top: 10px;
+
+                >span {
+                    font-weight: bolder;
+                }
+
+                &:hover {
+                    color: red;
+                    cursor: pointer;
+                }
             }
 
         }

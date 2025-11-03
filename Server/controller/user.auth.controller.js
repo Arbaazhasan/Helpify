@@ -1,9 +1,27 @@
 import { catchAsyncError } from "../middleware/catchAsyncError.js";
 import { userModel } from "../models/user.model.js";
-import { userLoginSchema, userRegisterSchema } from "../schemas/user.schema.js";
+import { auth0RegisterAPISchema, userLoginSchema, userRegisterSchema } from "../schemas/user.schema.js";
 import { ErrorHandler } from "../utils/ErrorHandler.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+
+
+export const auth0RegisterAPI = catchAsyncError(async (req, res, next) => {
+
+    const data = req.body;
+    const validateData = auth0RegisterAPISchema(data);
+
+    if (validateData.error) return next(new ErrorHandler(`Validation error from register controller : , ${validateData.error.message}`, 400));
+
+    // Generate Verification key
+    const verificationKey = Math.floor(Math.random() * 9000) + 1000 * new Date().getMilliseconds();
+
+    const user = await userModel.create({
+        ...data,
+        verificationKey
+    });
+
+})
 
 
 export const register = catchAsyncError(async (req, res, next) => {

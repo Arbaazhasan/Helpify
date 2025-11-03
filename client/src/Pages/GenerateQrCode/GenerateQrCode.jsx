@@ -5,9 +5,19 @@ import { BsBoxSeam } from "react-icons/bs";
 import { IoQrCodeOutline } from "react-icons/io5";
 import { FaDownload } from "react-icons/fa6";
 import QRCode from "qrcode"
+import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { generateQrCodeAction } from '../../redux/actions/generateQrCode.action';
+import { qrCodeValidationSchema } from '../../validation/QrCodeValidationSchema';
+import toast from 'react-hot-toast';
+import { server } from '../../redux/store/store';
+// import QRCode from "react-qr-code";
 
 const GenerateQrCode = () => {
 
+    const dispatch = useDispatch();
+    const { isAuthenticated, } = useSelector(state => state.userAuthReducer);
+    const { qrCode } = useSelector(state => state.generateQrCodeReducer);
 
     const [name, setName] = useState("");
     const [message, setMessage] = useState("");
@@ -17,22 +27,20 @@ const GenerateQrCode = () => {
     const [otherLink, setOtherLink] = useState("");
     const [dataURL, setDataURL] = useState("");
 
-
     useEffect(() => {
 
+    }, [qrCode])
 
-    }, [])
 
-
-    const generateQrCode = (e) => {
+    const generateQrCode = async (e) => {
         e.preventDefault();
 
-        QRCode.toDataURL("https://www.linkedin.com/").then((value) => {
-            console.log(value)
-            setDataURL(value)
-        }).catch((e) => {
-            console.log(e)
-        })
+        const { error } = qrCodeValidationSchema.validate({ name, message, phoneNo, secondNo, socialMedia, otherLink })
+
+        if (error) return toast.error(error.details[0].message);
+
+        generateQrCodeAction(dispatch, QRCode, name, message, phoneNo, secondNo, socialMedia, otherLink);
+
 
 
     }
@@ -40,6 +48,18 @@ const GenerateQrCode = () => {
 
     return (
         <div className='GenerateQrCode'>
+
+            {
+                !isAuthenticated &&
+
+                <Link to={'/login'} className='login-banner-btn'>
+                    <p>
+                        Login to Generate Qr Code
+                    </p>
+                </Link>
+
+            }
+
 
             <div className="productInformation">
 
@@ -90,15 +110,19 @@ const GenerateQrCode = () => {
 
 
                 {
-                    dataURL ?
+                    qrCode?.url ?
                         <div className="qrCode">
-                            <img src={dataURL} alt="" />
+                            <img src={`${server}/qr/getownerdetails/${qrCode._id}`} alt="" />
+                            <img src={qrCode?.url} alt="" />
+
                         </div>
 
                         :
 
                         <div className="qr-icon">
                             <IoQrCodeOutline />
+                            {/* <img src={dataURL} alt="" /> */}
+
                         </div>
 
                 }
@@ -110,27 +134,27 @@ const GenerateQrCode = () => {
                         <tbody>
                             <tr>
                                 <th>Name</th>
-                                <td>Arbaz</td>
+                                <td>{qrCode?.name}</td>
                             </tr>
                             <tr>
                                 <th>Message</th>
-                                <td>Lorem ipsum dolor sit amet consectetur adipisicing.</td>
+                                <td>{qrCode?.message}</td>
                             </tr>
                             <tr>
                                 <th>Contact Number</th>
-                                <td>+91 9058714187</td>
+                                <td> {qrCode?.primaryContactNumber}</td>
                             </tr>
                             <tr>
                                 <th>Secondary Number</th>
-                                <td>+91 9058714187</td>
+                                <td> {qrCode?.secondaryContactNumber}</td>
                             </tr>
                             <tr>
                                 <th>Social Media</th>
-                                <td>https://www.instagram.com/lord_arbaz</td>
+                                <td>{qrCode?.socialMediaLink}</td>
                             </tr>
                             <tr>
                                 <th>Other</th>
-                                <td>https://www.github.com/Arbazhasan</td>
+                                <td>{qrCode?.otherLink}</td>
                             </tr>
 
                         </tbody>
@@ -138,9 +162,9 @@ const GenerateQrCode = () => {
                 </div>
 
                 {
-                    dataURL ?
+                    qrCode?.url ?
 
-                        <a href={dataURL} download="qrcode.png" className='qr-download-btn'>
+                        <a onClick={() => console.log("cick")} href={qrCode?.url} download="qrcode.png" className='qr-download-btn'>
                             <button> <FaDownload /> Download QR Code</button>
                         </a>
                         :
