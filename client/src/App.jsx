@@ -13,6 +13,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 import Loading from './components/Loading/Loading';
 import toast, { Toaster } from 'react-hot-toast';
 import { getUserProfileAction } from './redux/actions/userAuth.action';
+import History from './Pages/History/History';
 
 
 
@@ -23,10 +24,11 @@ const App = () => {
 
   const dispatch = useDispatch();
   const { isAuthenticated, error: userAuthError, loading: userAuthLoading } = useSelector(state => state.userAuthReducer)
-  const { error: generateQrCodeError, loading: generateQrCodeLoading } = useSelector(state => state.generateQrCodeReducer)
+  const { error: generateQrCodeError, loading: generateQrCodeLoading } = useSelector(state => state.qrCodeReducer)
 
   useEffect(() => {
     getUserProfileAction(dispatch);
+
   }, [dispatch]);
 
   useEffect(() => {
@@ -34,7 +36,7 @@ const App = () => {
       toast.error(userAuthError);
 
     if (generateQrCodeError)
-      toast.error(userAuthError);
+      toast.error(generateQrCodeError);
   }, [userAuthError, generateQrCodeError])
 
   return (
@@ -65,10 +67,18 @@ const App = () => {
           }
         />
 
-        <Route path="/verify"
+        <Route path="/verify/:id"
           element={
             <ProtectedRoutes isAuthenticated={isAuthenticated} >
               <VerifyProduct />
+            </ProtectedRoutes>
+          }
+        />
+
+        <Route path="/history"
+          element={
+            <ProtectedRoutes isAuthenticated={isAuthenticated} >
+              <History />
             </ProtectedRoutes>
           }
         />

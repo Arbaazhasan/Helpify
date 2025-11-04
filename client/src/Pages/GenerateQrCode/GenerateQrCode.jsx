@@ -7,17 +7,17 @@ import { FaDownload } from "react-icons/fa6";
 import QRCode from "qrcode"
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { generateQrCodeAction } from '../../redux/actions/generateQrCode.action';
+import { generateQrCodeAction } from '../../redux/actions/qrCode.action';
 import { qrCodeValidationSchema } from '../../validation/QrCodeValidationSchema';
 import toast from 'react-hot-toast';
-import { server } from '../../redux/store/store';
+import { client_url, server } from '../../redux/store/store';
 // import QRCode from "react-qr-code";
 
 const GenerateQrCode = () => {
 
     const dispatch = useDispatch();
     const { isAuthenticated, } = useSelector(state => state.userAuthReducer);
-    const { qrCode } = useSelector(state => state.generateQrCodeReducer);
+    const { qrCode } = useSelector(state => state.qrCodeReducer);
 
     const [name, setName] = useState("");
     const [message, setMessage] = useState("");
@@ -104,6 +104,9 @@ const GenerateQrCode = () => {
                 </form>
 
 
+
+
+     
             </div>  <div className="qr-code-generator">
 
                 <h2><p><IoQrCodeOutline /></p>Product Information</h2>
@@ -112,7 +115,7 @@ const GenerateQrCode = () => {
                 {
                     qrCode?.url ?
                         <div className="qrCode">
-                            <img src={`${server}/qr/getownerdetails/${qrCode._id}`} alt="" />
+                            <img src={`${client_url}/qr/verfiyownerwithkey/${qrCode._id}`} alt="" />
                             <img src={qrCode?.url} alt="" />
 
                         </div>

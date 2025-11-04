@@ -4,7 +4,9 @@
     align-items: center;
     justify-content: center;
     // height: 100vh;
-    padding: 10rem;
+    // padding: 10rem;
+    gap: 2em;
+    // flex-direction: column;
 
     >.card {
         border: 1px solid gray;

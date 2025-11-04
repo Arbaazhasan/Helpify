@@ -1,0 +1,131 @@
+.product-Information {
+
+    // display: grid;
+    // grid-template-columns: 1fr 1fr 1fr;
+    // gap: 3rem 3rem;
+    // padding: 2rem;
+
+    >.qr-code-generator {
+
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin: auto;
+        margin-top: 2rem;
+        border: 1px solid rgba(198, 198, 198, 0.496);
+        border-radius: 12px;
+        overflow: hidden;
+        padding: 1rem;
+        box-shadow: 0px 0px 10px rgba(207, 207, 207, 0.446);
+
+        >h2 {
+            width: 100%;
+            padding: 2rem;
+            background-color: rgb(245, 245, 254);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: x-large;
+            font-weight: bolder;
+
+            >p {
+                background: linear-gradient(to bottom right, #a855f7, #3b82f6);
+                color: white;
+                padding: 10px;
+                font-weight: 800;
+                border-radius: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+
+
+        >.qr-icon {
+            border-radius: .5rem;
+            background: linear-gradient(to bottom right, #a855f7, #ec4899, #3b82f6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: .5rem;
+            color: white;
+            font-size: 120px;
+
+        }
+
+        >.qrCode {
+            // border: 2px solid red;
+            width: 150px;
+            height: 150px;
+            background-color: white;
+            box-shadow: 0px 0px 20px 2px rgba(194, 194, 194, 0.442);
+            // box-shadow: 0px 0px 15px rgba(128, 128, 128, 0.598);
+            display: flex;
+            // align-items: center;
+            justify-content: center;
+            overflow: hidden;
+
+
+            >img {
+                max-width: 100%;
+                max-height: 100%;
+            }
+
+        }
+
+
+        >.qr-details {
+            border-radius: 1rem;
+            // border: 2px solid red;
+
+            >table {
+                margin: auto;
+                // border: 2px solid red;
+                border-collapse: collapse;
+                text-align: left;
+                min-width: 30rem;
+
+                >tbody {
+
+                    >tr {
+                        >th {
+                            border: 1px solid rgb(196, 196, 196);
+                            padding: 1rem;
+
+                        }
+
+                        >td {
+                            border: 1px solid rgb(196, 196, 196);
+                            padding: 1rem;
+
+                        }
+                    }
+                }
+            }
+        }
+
+        >.qr-download-btn {
+
+            >button {
+                padding: 2rem;
+                background-color: rgb(245, 52, 155);
+                color: white;
+                font-size: x-large;
+                border-radius: 1rem;
+                border: none;
+                cursor: pointer;
+                transition: .5s all;
+
+                &:hover {
+                    transform: translateY(-5px);
+                }
+
+
+            }
+        }
+
+
+    }
+}

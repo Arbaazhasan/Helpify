@@ -50,12 +50,12 @@ const Header = () => {
                             </Link>
                         }
 
-                        <Link to={'/verify'}>
+                        <Link to={'/verify/68f9868d03386292107e4644'}>
                             <p><MdOutlineVerified /></p>
                             <p>Verify Key</p>
                         </Link>
 
-                        <Link >
+                        <Link to={'/history'}>
                             <p><IoDocumentTextOutline /></p>
                             <p>History</p>
                         </Link>
