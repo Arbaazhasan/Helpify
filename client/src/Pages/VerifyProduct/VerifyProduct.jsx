@@ -1,31 +1,35 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './verifyProduct.scss'
 import { AiOutlineSecurityScan } from "react-icons/ai";
 import ProductInformation from '../../components/ProductInformation/ProductInformation';
-import { verifyOwnerwithKeyAction } from '../../redux/actions/qrCode.action';
-import { useDispatch } from 'react-redux';
+import { getOwnDetails, verifyOwnerwithKeyAction } from '../../redux/actions/qrCode.action';
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 const VerifyProduct = () => {
 
     const dispatch = useDispatch();
+    const { getOwnerDetails } = useSelector(state => state.qrCodeReducer);
     const { id } = useParams();
 
     const [verificationKey, setVerificationKey] = useState('')
 
     const submitHandler = (e) => {
         e.preventDefault();
-
         verifyOwnerwithKeyAction(dispatch, id, verificationKey)
-
     }
+
+
+    useEffect(() => {
+        getOwnDetails(dispatch, id);
+    }, [])
 
 
     return (
         <div className='Verify-Product-Page'>
 
 
-            <ProductInformation showQRCode={false} />
+            <ProductInformation qrCode={getOwnerDetails} showQRCode={false} />
 
 
             <form className="card" onSubmit={submitHandler}>

@@ -1,7 +1,7 @@
 import axios from "axios";
-import { server } from "../store/store";
+import { client_url, server } from "../store/store";
 import toast from "react-hot-toast";
-import { generateQrCodeFailed, generateQrCodeRequest, generateQrCodeSuccess, getAllQrCodeInformationFailed, getAllQrCodeInformationRequest, getAllQrCodeInformationSuccess, verifyOwnerwithKeyFailed, verifyOwnerwithKeyRequest, verifyOwnerwithKeySuccess } from "../reducers/qrCode.reducer";
+import { generateQrCodeFailed, generateQrCodeRequest, generateQrCodeSuccess, getAllQrCodeInformationFailed, getAllQrCodeInformationRequest, getAllQrCodeInformationSuccess, getOwnerDetailsFailed, getOwnerDetailsRequest, getOwnerDetailsSuccess, verifyOwnerwithKeyFailed, verifyOwnerwithKeyRequest, verifyOwnerwithKeySuccess } from "../reducers/qrCode.reducer";
 
 
 export const generateQrCodeAction = async (dispatch, QRCode,
@@ -30,10 +30,9 @@ export const generateQrCodeAction = async (dispatch, QRCode,
             withCredentials: true
         });
 
-        const url = await QRCode.toDataURL(`${server}/qr/getownerdetails/${data?.message?._id}`)
+        const url = await QRCode.toDataURL(`${client_url}/verify/${data?.message?._id}`)
 
         const qrCodeData = { ...data?.message, url }
-        console.log(qrCodeData)
 
         dispatch(generateQrCodeSuccess(qrCodeData))
 
@@ -91,4 +90,28 @@ export const verifyOwnerwithKeyAction = async (dispatch, id, key) => {
         dispatch(verifyOwnerwithKeyFailed(error?.response?.data?.message))
     }
 
+};
+
+
+
+export const getOwnDetails = async (dispatch, id) => {
+
+    try {
+
+        dispatch(getOwnerDetailsRequest());
+
+        const { data } = await axios.get(`${server}/qr/getownerdetails/${id}`, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true
+        });
+        dispatch(getOwnerDetailsSuccess(data.message));
+
+
+    } catch (error) {
+        dispatch(getOwnerDetailsFailed(error?.response?.data?.message))
+    }
 }
+
+

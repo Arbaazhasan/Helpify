@@ -6,7 +6,8 @@ const initialState = {
     success: false,
     qrCode: null,
     qrCodeArray: [],
-    ownerInformation: {},
+    verifiedOwnerInformation: {},
+    getOwnerDetails: {}
 
 };
 
@@ -56,13 +57,29 @@ export const qrCodeReducer = createSlice({
         verifyOwnerwithKeySuccess: (state, action) => {
             state.loading = false;
             state.success = true;
-            state.ownerInformation = action.payload;
+            state.verifiedOwnerInformation = action.payload;
         },
         verifyOwnerwithKeyFailed: (state, action) => {
             state.loading = false;
             state.success = false;
             state.error = action.payload;
-        }
+        },
+
+        getOwnerDetailsRequest: (state, action) => {
+            state.loading = true;
+            state.error = null;
+            state.success = false;
+        },
+        getOwnerDetailsSuccess: (state, action) => {
+            state.loading = false;
+            state.success = true;
+            state.getOwnerDetails = action.payload;
+        },
+        getOwnerDetailsFailed: (state, action) => {
+            state.loading = false;
+            state.success = false;
+            state.error = action.payload;
+        },
 
 
     }
@@ -81,6 +98,10 @@ export const {
     verifyOwnerwithKeyRequest,
     verifyOwnerwithKeySuccess,
     verifyOwnerwithKeyFailed,
+
+    getOwnerDetailsRequest,
+    getOwnerDetailsSuccess,
+    getOwnerDetailsFailed,
 
 } = qrCodeReducer.actions;
 

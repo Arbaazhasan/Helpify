@@ -115,7 +115,7 @@ const GenerateQrCode = () => {
                 {
                     qrCode?.url ?
                         <div className="qrCode">
-                            <img src={`${client_url}/qr/verfiyownerwithkey/${qrCode._id}`} alt="" />
+                            <img src={`${client_url}/verify/${qrCode._id}`} alt="" />
                             <img src={qrCode?.url} alt="" />
 
                         </div>

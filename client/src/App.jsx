@@ -69,9 +69,7 @@ const App = () => {
 
         <Route path="/verify/:id"
           element={
-            <ProtectedRoutes isAuthenticated={isAuthenticated} >
-              <VerifyProduct />
-            </ProtectedRoutes>
+            <VerifyProduct />
           }
         />
 
