@@ -29,7 +29,11 @@ const VerifyProduct = () => {
         <div className='Verify-Product-Page'>
 
 
-            <ProductInformation qrCode={getOwnerDetails} showQRCode={false} />
+            <div className="bothOwnerDetails">
+                <ProductInformation qrCode={getOwnerDetails} showQRCode={false} />
+                <ProductInformation qrCode={getOwnerDetails} showQRCode={false} />
+
+            </div>
 
 
             <form className="card" onSubmit={submitHandler}>
