@@ -36,7 +36,7 @@ db_connect();
 
 // Cors Configuration
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: process.env.CORS_ORIGIN,
     credentials: true,
 }));
 
