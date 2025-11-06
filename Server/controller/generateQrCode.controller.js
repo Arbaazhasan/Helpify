@@ -3,7 +3,19 @@ import { catchAsyncError } from "../middleware/catchAsyncError.js";
 import { QrCodeModel } from "../models/qrcode.model.js";
 import { userModel } from "../models/user.model.js";
 import { generateQrCodeSchema } from "../schemas/qrCode.schema.js";
-import { ErrorHandler } from "../utils/errorHandler.js";
+// import { ErrorHandler } from "../utils/errorHandler.js";
+
+
+
+export class ErrorHandler extends Error {
+    constructor(message, statusCode) {
+
+        super(message);
+        this.statusCode = statusCode;
+
+    }
+};
+
 
 export const generateQrCode = catchAsyncError(async (req, res, next) => {
 

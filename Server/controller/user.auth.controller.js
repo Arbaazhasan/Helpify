@@ -1,9 +1,20 @@
 import { catchAsyncError } from "../middleware/catchAsyncError.js";
 import { userModel } from "../models/user.model.js";
 import { auth0RegisterAPISchema, userLoginSchema, userRegisterSchema } from "../schemas/user.schema.js";
-import { ErrorHandler } from "../utils/ErrorHandler.js";
+// import { ErrorHandler } from "../utils/ErrorHandler.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+
+
+export class ErrorHandler extends Error {
+    constructor(message, statusCode) {
+
+        super(message);
+        this.statusCode = statusCode;
+
+    }
+};
+
 
 
 export const auth0RegisterAPI = catchAsyncError(async (req, res, next) => {
