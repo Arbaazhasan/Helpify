@@ -4,7 +4,7 @@ import db_connect from "./data/db_connect.js";
 import cors from 'cors'
 import cookieParser from "cookie-parser";
 
-import errorMiddleware from "./middleware/Error.js";
+import ErrorMiddleware from "./middleware/Error.js";
 
 import userRouter from "./routes/user.routes.js"
 import generateQrCodeRouter from './routes/generateQrCode.routes.js';
@@ -61,4 +61,4 @@ app.listen(PORT, () => {
 })
 
 // Error Middleware
-app.use(errorMiddleware)
+app.use(ErrorMiddleware)
