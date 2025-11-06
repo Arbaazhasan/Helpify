@@ -45,34 +45,47 @@ const Header = () => {
                         {
                             path.pathname !== '/' &&
                             <Link to={'/'}>
-                                <p><IoQrCodeSharp /></p>
-                                <p>Generate QR Code</p>
+                                <div>
+                                    <p><IoQrCodeSharp /></p>
+                                    <p>Generate QR Code</p>
+                                </div>
                             </Link>
                         }
 
                         <Link to={'/verify/68f9868d03386292107e4644'}>
-                            <p><MdOutlineVerified /></p>
-                            <p>Verify Key</p>
+                            <div>
+                                <p><MdOutlineVerified /></p>
+                                <p>Verify Key</p>
+                            </div>
                         </Link>
 
                         <Link to={'/history'}>
-                            <p><IoDocumentTextOutline /></p>
-                            <p>History</p>
+                            <div>
+                                <p><IoDocumentTextOutline /></p>
+                                <p>History</p>
+                            </div>
                         </Link>
 
                         {
                             isAuthenticated ?
+
                                 <Link
                                     onClick={handleLogout}
                                     className="button logout"
                                 >
-                                    <p><IoIosLogOut /></p>
-                                    <p>Logout</p>
+                                    <div>
+
+                                        <p><IoIosLogOut /></p>
+                                        <p>Logout</p>
+                                    </div>
                                 </Link>
                                 :
                                 <Link>
-                                    <p><IoIosLogOut /></p>
-                                    <p>Log In</p>
+                                    <div>
+
+                                        <p><IoIosLogOut /></p>
+                                        <p>Log In</p>
+                                    </div>
                                 </Link>
 
 
@@ -81,7 +94,10 @@ const Header = () => {
 
                         <Link to={'profile'} className="profile-icon">
                             <div>
-                                <img src="/user.png" alt="" />
+
+                                <div>
+                                    <img src="/user.png" alt="" />
+                                </div>
                             </div>
                         </Link>
 

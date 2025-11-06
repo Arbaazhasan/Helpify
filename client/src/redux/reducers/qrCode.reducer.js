@@ -53,6 +53,7 @@ export const qrCodeReducer = createSlice({
             state.loading = true;
             state.error = null;
             state.success = false;
+            state.verifiedOwnerInformation = null;
         },
         verifyOwnerwithKeySuccess: (state, action) => {
             state.loading = false;

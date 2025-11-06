@@ -45,8 +45,7 @@ export const generateQrCodeAction = async (dispatch, QRCode,
 }
 
 
-export const getAllQrCodeInformationAction = async (dispatch) => {
-
+export const getAllQrCodeInformationAction = async (dispatch, QRCode) => {
 
     try {
         dispatch(getAllQrCodeInformationRequest());
@@ -58,7 +57,17 @@ export const getAllQrCodeInformationAction = async (dispatch) => {
             withCredentials: true
         });
 
-        dispatch(getAllQrCodeInformationSuccess(data.message));
+        if (!Array.isArray(data.message)) {
+            throw new Error("Invalid response from server");
+        }
+        const newArray = await Promise.all(
+            data.message.map(async (value) => {
+                const url = await QRCode.toDataURL(`${client_url}/verify/${value._id}`);
+                return { ...value, url };
+            })
+        );
+
+        dispatch(getAllQrCodeInformationSuccess(newArray));
 
     } catch (error) {
         dispatch(getAllQrCodeInformationFailed(error?.response?.data?.message))
@@ -82,7 +91,7 @@ export const verifyOwnerwithKeyAction = async (dispatch, id, key) => {
             withCredentials: true
         });
 
-        dispatch(verifyOwnerwithKeySuccess());
+        dispatch(verifyOwnerwithKeySuccess(data.message));
         if (data.success)
             toast.success(data.message.message);
 

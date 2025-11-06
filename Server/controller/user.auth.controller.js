@@ -95,6 +95,13 @@ export const login = catchAsyncError(async (req, res, next) => {
         expiresIn: "1d",
     });
 
+    const userData = {
+
+        name: isUserExists.name,
+        email: isUserExists.email,
+        verificationKey: isUserExists.verificationKey
+    }
+
     res.status(200).cookie("token", token, {
         maxAge: 24 * 60 * 60 * 1000,
         secure: process.env.NODE_ENV === "production",
@@ -102,7 +109,8 @@ export const login = catchAsyncError(async (req, res, next) => {
         httpOnly: true,
     }).json({
         success: true,
-        message: "Successfully login"
+        message: "Successfully login",
+        userData
     });
 
 });

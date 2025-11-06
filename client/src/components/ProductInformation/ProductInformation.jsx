@@ -8,11 +8,12 @@ import QRCode from 'react-qr-code';
 import { server } from '../../redux/store/store';
 
 
-const ProductInformation = ({ qrCode, index, showQRCode }) => {
+const ProductInformation = ({ qrCode, index, showQRCode, isVerifiedOwner, verifiedOwnerInfo }) => {
 
     const { qrCodeArray } = useSelector(state => state.qrCodeReducer);
 
     useEffect(() => {
+
     }, [qrCodeArray]);
 
     return (
@@ -20,7 +21,13 @@ const ProductInformation = ({ qrCode, index, showQRCode }) => {
 
             <div className="qr-code-generator" key={index}>
 
-                <h2><p><IoQrCodeOutline /></p>Product Information</h2>
+                <h2><p><IoQrCodeOutline /></p>
+
+                    {
+                        isVerifiedOwner ? "Verified Owner Information" : "Product Information"
+                    }
+
+                </h2>
 
                 {
                     showQRCode &&
@@ -33,38 +40,61 @@ const ProductInformation = ({ qrCode, index, showQRCode }) => {
                     </div>
                 }
 
+                {
+                    isVerifiedOwner ?
 
-                <div className="qr-details">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>Name</th>
-                                <td>{qrCode?.name}</td>
-                            </tr>
-                            <tr>
-                                <th>Message</th>
-                                <td>{qrCode?.message}</td>
-                            </tr>
-                            <tr>
-                                <th>Contact Number</th>
-                                <td> {qrCode?.primaryContactNumber}</td>
-                            </tr>
-                            <tr>
-                                <th>Secondary Number</th>
-                                <td> {qrCode?.secondaryContactNumber}</td>
-                            </tr>
-                            <tr>
-                                <th>Social Media</th>
-                                <td>{qrCode?.socialMediaLink}</td>
-                            </tr>
-                            <tr>
-                                <th>Other</th>
-                                <td>{qrCode?.otherLink}</td>
-                            </tr>
 
-                        </tbody>
-                    </table>
-                </div>
+                        <div className="qr-details">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th>Name</th>
+                                        <td>{verifiedOwnerInfo?.name}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email</th>
+                                        <td>{verifiedOwnerInfo?.message}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+
+                        :
+                        <div className="qr-details">
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th>Name</th>
+                                        <td>{qrCode?.name}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Message</th>
+                                        <td>{qrCode?.message}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Contact Number</th>
+                                        <td> {qrCode?.primaryContactNumber}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Secondary Number</th>
+                                        <td> {qrCode?.secondaryContactNumber}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Social Media</th>
+                                        <td>{qrCode?.socialMediaLink}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Other</th>
+                                        <td>{qrCode?.otherLink}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                }
+
+
 
                 {
 
@@ -74,7 +104,7 @@ const ProductInformation = ({ qrCode, index, showQRCode }) => {
                                 <button> <FaDownload /> Download QR Code</button>
                             </a>
                             :
-                            <div className='qr-download-btn'>
+                            <div className='qr-download-btn' onClick={() => { console.log("click") }}>
                                 <button> <FaDownload /> Download QR Code</button>
                             </div>
 

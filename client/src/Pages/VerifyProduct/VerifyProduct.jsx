@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 const VerifyProduct = () => {
 
     const dispatch = useDispatch();
-    const { getOwnerDetails } = useSelector(state => state.qrCodeReducer);
+    const { getOwnerDetails, verifiedOwnerInformation } = useSelector(state => state.qrCodeReducer);
     const { id } = useParams();
 
     const [verificationKey, setVerificationKey] = useState('')
@@ -22,7 +22,8 @@ const VerifyProduct = () => {
 
     useEffect(() => {
         getOwnDetails(dispatch, id);
-    }, [])
+        console.log(verifiedOwnerInformation)
+    }, [verifiedOwnerInformation])
 
 
     return (
@@ -31,7 +32,7 @@ const VerifyProduct = () => {
 
             <div className="bothOwnerDetails">
                 <ProductInformation qrCode={getOwnerDetails} showQRCode={false} />
-                <ProductInformation qrCode={getOwnerDetails} showQRCode={false} />
+                <ProductInformation qrCode={getOwnerDetails} showQRCode={false} isVerifiedOwner={true} verifiedOwnerInfo={verifiedOwnerInformation} />
 
             </div>
 

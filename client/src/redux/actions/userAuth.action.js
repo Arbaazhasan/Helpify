@@ -22,7 +22,7 @@ export const userLoginAction = async (dispatch, email, password) => {
             withCredentials: true,
         });
 
-        dispatch(userLoginSuccess());
+        dispatch(userLoginSuccess(data.userData));
         toast.success(data.message)
 
     } catch (error) {
