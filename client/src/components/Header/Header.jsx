@@ -52,12 +52,12 @@ const Header = () => {
                             </Link>
                         }
 
-                        <Link to={'/verify/68f9868d03386292107e4644'}>
+                        {/* <Link to={'/verify/68f9868d03386292107e4644'}>
                             <div>
                                 <p><MdOutlineVerified /></p>
                                 <p>Verify Key</p>
                             </div>
-                        </Link>
+                        </Link> */}
 
                         <Link to={'/history'}>
                             <div>
