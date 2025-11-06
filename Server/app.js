@@ -4,11 +4,22 @@ import db_connect from "./data/db_connect.js";
 import cors from 'cors'
 import cookieParser from "cookie-parser";
 
-import ErrorMiddleware from "./middleware/Error.js";
+// import ErrorMiddleware from "./middleware/Error.js";
 
 import userRouter from "./routes/user.routes.js"
 import generateQrCodeRouter from './routes/generateQrCode.routes.js';
 
+
+const ErrorMiddleware = (err, req, res, next) => {
+    err.message = err.message || "Internal server error";
+    err.statusCode = err.statusCode || 500;
+
+    res.status(err.statusCode).json({
+        success: false,
+        message: err.message,
+        error: err
+    });
+};
 const app = express();
 
 // env Configuration
