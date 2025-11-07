@@ -53,7 +53,7 @@ const ProductInformation = ({ qrCode, index, showQRCode, isVerifiedOwner, verifi
                                     </tr>
                                     <tr>
                                         <th>Email</th>
-                                        <td>{verifiedOwnerInfo?.message}</td>
+                                        <td>{verifiedOwnerInfo?.email}</td>
                                     </tr>
 
                                 </tbody>
