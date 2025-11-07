@@ -14,6 +14,7 @@ import Loading from './components/Loading/Loading';
 import toast, { Toaster } from 'react-hot-toast';
 import { getUserProfileAction } from './redux/actions/userAuth.action';
 import History from './Pages/History/History';
+import Screen from './components/ScreenSize/ScreenSize';
 
 
 
@@ -42,7 +43,10 @@ const App = () => {
   return (
 
     <Router>
+
       <Toaster />
+
+      <Screen />
 
       {
         generateQrCodeLoading || userAuthLoading && <Loading />
